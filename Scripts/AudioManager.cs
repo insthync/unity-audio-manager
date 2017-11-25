@@ -33,4 +33,30 @@ public class AudioManager : MonoBehaviour
             VolumeSettings[otherVolumeSetting.id] = otherVolumeSetting;
         }
     }
+
+    public void SetVolumeIsOn(string id, bool isOn)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            VolumeSettings[id].IsOn = isOn;
+    }
+
+    public bool GetVolumeIsOn(string id)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            return VolumeSettings[id].IsOn;
+        return false;
+    }
+
+    public void SetVolumeLevel(string id, float level)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            VolumeSettings[id].Level = level;
+    }
+
+    public float GetVolumeLevel(string id)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            return VolumeSettings[id].Level;
+        return 0;
+    }
 }

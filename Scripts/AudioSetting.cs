@@ -19,7 +19,7 @@ public class AudioSetting
         }
     }
 
-    public float VolumeLevel
+    public float Level
     {
         get
         {
