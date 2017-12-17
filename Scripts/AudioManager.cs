@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
@@ -55,6 +56,9 @@ public class AudioManager : MonoBehaviour
 
     public float GetVolumeLevel(string id)
     {
+        if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null)
+            return 0;
+
         if (VolumeSettings.ContainsKey(id))
             return VolumeSettings[id].Level;
         return 0;

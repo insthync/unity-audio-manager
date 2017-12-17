@@ -5,15 +5,38 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioSourceSetter : AudioComponent
 {
-    public AudioSource audioSource { get; private set; }
+    public bool playOnAwake = true;
+    public AudioClip[] randomClips;
+    private AudioSource tempAudioSource;
+    public AudioSource TempAudioSource
+    {
+        get
+        {
+            if (tempAudioSource == null)
+                tempAudioSource = GetComponent<AudioSource>();
+            return tempAudioSource;
+        }
+    }
     private void Awake()
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        TempAudioSource.Stop();
+        TempAudioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        if (randomClips.Length > 0)
+            TempAudioSource.clip = randomClips[Random.Range(0, randomClips.Length - 1)];
+        if (playOnAwake)
+            TempAudioSource.Play();
     }
 
     private void Update()
     {
-        audioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        TempAudioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        TempAudioSource.playOnAwake = false;
+        TempAudioSource.volume = 0;
+    }
+#endif
 }
