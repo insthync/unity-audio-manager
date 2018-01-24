@@ -5,6 +5,12 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class AudioSourceSetter : AudioComponent
 {
+    public enum PlayMode
+    {
+        PlayClipAtAudioSource,
+        PlayClipAtPoint,
+    }
+    public PlayMode playMode;
     public bool playOnAwake = true;
     public AudioClip[] randomClips;
     private AudioSource tempAudioSource;
@@ -20,11 +26,31 @@ public class AudioSourceSetter : AudioComponent
     private void Awake()
     {
         TempAudioSource.Stop();
-        TempAudioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
-        if (randomClips.Length > 0)
-            TempAudioSource.clip = randomClips[Random.Range(0, randomClips.Length - 1)];
         if (playOnAwake)
-            TempAudioSource.Play();
+            Play();
+    }
+
+    public void Play()
+    {
+        AudioClip clip = null;
+        if (randomClips.Length > 0)
+            clip = randomClips[Random.Range(0, randomClips.Length - 1)];
+
+        if (clip == null)
+            return;
+
+        var volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        switch (playMode)
+        {
+            case PlayMode.PlayClipAtAudioSource:
+                TempAudioSource.clip = clip;
+                TempAudioSource.volume = volume;
+                TempAudioSource.Play();
+                break;
+            case PlayMode.PlayClipAtPoint:
+                AudioSource.PlayClipAtPoint(clip, transform.position, volume);
+                break;
+        }
     }
 
     private void Update()
