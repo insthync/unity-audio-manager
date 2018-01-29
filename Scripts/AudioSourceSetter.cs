@@ -37,7 +37,11 @@ public class AudioSourceSetter : AudioComponent
             clip = randomClips[Random.Range(0, randomClips.Length - 1)];
 
         if (clip == null)
-            return;
+        {
+            if (TempAudioSource.clip == null)
+                return;
+            clip = TempAudioSource.clip;
+        }
 
         var volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
         switch (playMode)
