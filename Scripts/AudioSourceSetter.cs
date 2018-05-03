@@ -32,7 +32,7 @@ public class AudioSourceSetter : AudioComponent
     {
         AudioClip clip = null;
         if (randomClips.Length > 0)
-            clip = randomClips[Random.Range(0, randomClips.Length - 1)];
+            clip = randomClips[Random.Range(0, randomClips.Length)];
 
         // No random clips, try to use clip from audio source
         if (clip == null)
