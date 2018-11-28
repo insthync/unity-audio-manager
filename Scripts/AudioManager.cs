@@ -25,6 +25,9 @@ public class AudioManager : MonoBehaviour
         Singleton = this;
         DontDestroyOnLoad(gameObject);
 
+        if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null)
+            AudioListener.pause = true;
+
         VolumeSettings[masterVolumeSetting.id] = masterVolumeSetting;
         VolumeSettings[bgmVolumeSetting.id] = bgmVolumeSetting;
         VolumeSettings[sfxVolumeSetting.id] = sfxVolumeSetting;
