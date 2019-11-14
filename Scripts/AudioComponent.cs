@@ -4,11 +4,11 @@ using UnityEngine;
 
 public enum AudioComponentSettingType
 {
-    MASTER,
-    BGM,
-    SFX,
-    AMBIENT,
-    OTHER
+    Master,
+    Bgm,
+    Sfx,
+    Ambient,
+    Other
 }
 
 public class AudioComponent : MonoBehaviour
@@ -22,13 +22,13 @@ public class AudioComponent : MonoBehaviour
         {
             switch (type)
             {
-                case AudioComponentSettingType.MASTER:
+                case AudioComponentSettingType.Master:
                     return AudioManager.Singleton.masterVolumeSetting.id;
-                case AudioComponentSettingType.BGM:
+                case AudioComponentSettingType.Bgm:
                     return AudioManager.Singleton.bgmVolumeSetting.id;
-                case AudioComponentSettingType.SFX:
+                case AudioComponentSettingType.Sfx:
                     return AudioManager.Singleton.sfxVolumeSetting.id;
-                case AudioComponentSettingType.AMBIENT:
+                case AudioComponentSettingType.Ambient:
                     return AudioManager.Singleton.ambientVolumeSetting.id;
             }
             return otherSettingId;
