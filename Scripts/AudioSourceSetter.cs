@@ -11,8 +11,10 @@ public class AudioSourceSetter : AudioComponent
     }
     public PlayMode playMode;
     public bool playOnAwake = true;
+    public bool playOnEnable = false;
     public AudioClip[] randomClips;
     private AudioSource cacheAudioSource;
+    private bool isAwaken;
 
     private void Awake()
     {
@@ -25,6 +27,14 @@ public class AudioSourceSetter : AudioComponent
         }
 
         if (playOnAwake)
+            Play();
+
+        isAwaken = true;
+    }
+
+    private void OnEnable()
+    {
+        if (playOnEnable && isAwaken)
             Play();
     }
 
