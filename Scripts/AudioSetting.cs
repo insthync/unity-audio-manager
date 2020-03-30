@@ -8,6 +8,8 @@ public class AudioSetting
     public const string KeyVolumeOnPrefix = "SETTING_VOLUME_ON_";
     public const string KeyVolumeLevelPrefix = "SETTING_VOLUME_LEVEL_";
     public string id;
+    [Range(0.01f, 1f)]
+    public float maxVolumeRate = 1f;
 
     public bool IsOn
     {
@@ -25,7 +27,7 @@ public class AudioSetting
         {
             if (!IsOn)
                 return 0;
-            return PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1);
+            return PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1) * maxVolumeRate;
         }
         set
         {
