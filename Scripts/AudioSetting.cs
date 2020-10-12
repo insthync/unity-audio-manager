@@ -27,7 +27,15 @@ public class AudioSetting
         {
             if (!IsOn)
                 return 0;
-            return PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1) * maxVolumeRate;
+            return LevelSetting * maxVolumeRate;
+        }
+    }
+
+    public float LevelSetting
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1);
         }
         set
         {

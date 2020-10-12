@@ -51,12 +51,6 @@ public class AudioManager : MonoBehaviour
         return false;
     }
 
-    public void SetVolumeLevel(string id, float level)
-    {
-        if (VolumeSettings.ContainsKey(id))
-            VolumeSettings[id].Level = level;
-    }
-
     public float GetVolumeLevel(string id)
     {
         if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null)
@@ -64,6 +58,19 @@ public class AudioManager : MonoBehaviour
 
         if (VolumeSettings.ContainsKey(id))
             return VolumeSettings[id].Level;
+        return 0;
+    }
+
+    public void SetVolumeLevelSetting(string id, float level)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            VolumeSettings[id].LevelSetting = level;
+    }
+
+    public float GetVolumeLevelSetting(string id)
+    {
+        if (VolumeSettings.ContainsKey(id))
+            return VolumeSettings[id].LevelSetting;
         return 0;
     }
 }
