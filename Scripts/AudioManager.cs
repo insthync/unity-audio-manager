@@ -73,4 +73,10 @@ public class AudioManager : MonoBehaviour
             return VolumeSettings[id].LevelSetting;
         return 0;
     }
+
+    public static void PlaySfxClipAtPoint(AudioClip audioClip, Vector3 position)
+    {
+        if (audioClip == null) return;
+        AudioSource.PlayClipAtPoint(audioClip, position, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
+    }
 }
