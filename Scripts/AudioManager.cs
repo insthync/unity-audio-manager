@@ -79,4 +79,10 @@ public class AudioManager : MonoBehaviour
         if (audioClip == null) return;
         AudioSource.PlayClipAtPoint(audioClip, position, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
     }
+
+    public static void PlaySfxClipAtAudioSource(AudioClip audioClip, AudioSource audioSource)
+    {
+        if (audioClip == null || audioSource == null) return;
+        audioSource.PlayOneShot(audioClip, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
+    }
 }
