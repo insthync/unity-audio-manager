@@ -15,6 +15,7 @@ public class AudioSourceSetter : AudioComponent
     public AudioClip[] randomClips;
     private AudioSource cacheAudioSource;
     private bool isAwaken;
+    private int dirtyVolume;
 
     private void Awake()
     {
@@ -68,8 +69,13 @@ public class AudioSourceSetter : AudioComponent
 
     private void Update()
     {
-        if (playMode == PlayMode.PlayClipAtAudioSource)
-            cacheAudioSource.volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        float volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
+        int intVolume = (int)(volume * 100);
+        if (playMode == PlayMode.PlayClipAtAudioSource && dirtyVolume != intVolume)
+        {
+            dirtyVolume = intVolume;
+            cacheAudioSource.volume = volume;
+        }
     }
 
 #if UNITY_EDITOR
