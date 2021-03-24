@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class AudioSetting
@@ -8,8 +7,9 @@ public class AudioSetting
     public const string KeyVolumeOnPrefix = "SETTING_VOLUME_ON_";
     public const string KeyVolumeLevelPrefix = "SETTING_VOLUME_LEVEL_";
     public string id;
+    [FormerlySerializedAs("maxVolumeRate")]
     [Range(0.01f, 1f)]
-    public float maxVolumeRate = 1f;
+    public float volumeScale = 1f;
 
     public bool IsOn
     {
@@ -27,7 +27,7 @@ public class AudioSetting
         {
             if (!IsOn)
                 return 0;
-            return LevelSetting * maxVolumeRate;
+            return LevelSetting * volumeScale;
         }
     }
 

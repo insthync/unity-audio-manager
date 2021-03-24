@@ -83,6 +83,9 @@ public class AudioManager : MonoBehaviour
     public static void PlaySfxClipAtAudioSource(AudioClip audioClip, AudioSource audioSource)
     {
         if (audioClip == null || audioSource == null) return;
-        audioSource.PlayOneShot(audioClip, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
+        float scale = 0f;
+        if (Singleton.sfxVolumeSetting.IsOn && Singleton.sfxVolumeSetting.Level > 0f)
+            scale = Singleton.sfxVolumeSetting.volumeScale;
+        audioSource.PlayOneShot(audioClip, Singleton == null ? 1f : scale);
     }
 }
