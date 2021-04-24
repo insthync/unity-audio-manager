@@ -23,7 +23,10 @@ public class AudioSourceSetter : AudioComponent
         {
             cacheAudioSource = GetComponent<AudioSource>();
             if (cacheAudioSource == null)
+            {
                 cacheAudioSource = gameObject.AddComponent<AudioSource>();
+                cacheAudioSource.spatialBlend = 1f;
+            }
             cacheAudioSource.Stop();
         }
 
