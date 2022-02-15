@@ -7,10 +7,10 @@ public class AudioSourceSetter : AudioComponent
         PlayClipAtAudioSource,
         PlayClipAtPoint,
     }
-    public PlayMode playMode;
+    public PlayMode playMode = PlayMode.PlayClipAtAudioSource;
     public bool playOnAwake = true;
     public bool playOnEnable = false;
-    public AudioClip[] randomClips;
+    public AudioClip[] randomClips = new AudioClip[0];
     private AudioSource cacheAudioSource;
     private bool isAwaken;
     private int dirtyVolume;
