@@ -12,7 +12,7 @@ public class AudioManager : MonoBehaviour
     public AudioSetting ambientVolumeSetting = new AudioSetting() { id = "AMBIENT" };
     public AudioSetting[] otherVolumeSettings;
 
-    private readonly Dictionary<string, AudioSetting> VolumeSettings = new Dictionary<string, AudioSetting>();
+    public Dictionary<string, AudioSetting> VolumeSettings { get; private set; } = new Dictionary<string, AudioSetting>();
 
     private void Awake()
     {
