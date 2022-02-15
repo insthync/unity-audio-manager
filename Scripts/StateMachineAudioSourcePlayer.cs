@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMachineAudioSourcePlayer : StateMachineBehaviour
@@ -67,7 +65,8 @@ public class StateMachineAudioSourcePlayer : StateMachineBehaviour
                 source.spatialBlend = 1f;
             }
             source.volume = volume;
-            source.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
+            if (!AudioListener.pause)
+                source.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
         }
         else if (stateInfo.normalizedTime % 1 < triggerTime && isTriggered)
         {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AudioSourceSetter : AudioComponent
 {
@@ -44,6 +42,8 @@ public class AudioSourceSetter : AudioComponent
 
     public void Play()
     {
+        if (AudioListener.pause)
+            return;
         AudioClip clip = null;
         if (randomClips.Length > 0)
             clip = randomClips[Random.Range(0, randomClips.Length)];
