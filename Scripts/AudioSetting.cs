@@ -55,4 +55,14 @@ public class AudioSetting
             return LevelSetting * volumeScale;
         }
     }
+
+    public AudioSetting Clone()
+    {
+        return new AudioSetting()
+        {
+            id = id,
+            IsOn = IsOn,
+            LevelSetting = LevelSetting,
+        };
+    }
 }
