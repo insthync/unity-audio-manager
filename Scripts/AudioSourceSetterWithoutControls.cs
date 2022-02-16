@@ -7,6 +7,7 @@ public class AudioSourceSetterWithoutControls : AudioComponent
 
     private void Awake()
     {
+        dirtyVolume = -1;
         cacheAudioSource = GetComponent<AudioSource>();
         if (cacheAudioSource == null)
         {

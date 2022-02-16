@@ -17,6 +17,7 @@ public class AudioSourceSetter : AudioComponent
 
     private void Awake()
     {
+        dirtyVolume = -1;
         if (playMode == PlayMode.PlayClipAtAudioSource)
         {
             cacheAudioSource = GetComponent<AudioSource>();
