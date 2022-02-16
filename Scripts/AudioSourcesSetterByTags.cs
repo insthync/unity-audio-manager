@@ -32,12 +32,14 @@ public class AudioSourcesSetterByTags : MonoBehaviour
         }
         AudioSourceSetter tempComp;
         AudioSource[] sources = FindObjectsOfType<AudioSource>(true);
+        bool tempIsSourcePlaying;
         foreach (AudioSource source in sources)
         {
             tempComp = source.gameObject.GetComponent<AudioSourceSetter>();
             if (tempComp) continue;
             tempComp = source.gameObject.AddComponent<AudioSourceSetter>();
             tempComp.playOnAwake = source.playOnAwake;
+            tempIsSourcePlaying = source.isPlaying;
             if (tempComp.gameObject.CompareTag(bgmTag))
             {
                 tempComp.type = AudioComponentSettingType.Bgm;
@@ -70,7 +72,7 @@ public class AudioSourcesSetterByTags : MonoBehaviour
                         break;
                 }
             }
-            if (!tempComp.playOnAwake)
+            if (!tempIsSourcePlaying)
                 tempComp.Stop();
         }
     }
