@@ -22,8 +22,16 @@ public class AudioSourcesSetterByTags : MonoBehaviour
     public string sfxTag = "SFX";
     public string ambientTag = "AMBIENT";
     public CustomIdTag[] customIdTags = new CustomIdTag[0];
+    public bool setOnStart = false;
 
     private void Start()
+    {
+        if (setOnStart)
+            Set();
+    }
+
+    [ContextMenu("Set")]
+    public void Set()
     {
         Dictionary<string, string> tempCustomIdTags = new Dictionary<string, string>();
         foreach (CustomIdTag customIdTag in customIdTags)
