@@ -37,6 +37,7 @@ public class AudioSourcesSetterByTags : MonoBehaviour
             tempComp = source.gameObject.GetComponent<AudioSourceSetter>();
             if (tempComp) continue;
             tempComp = source.gameObject.AddComponent<AudioSourceSetter>();
+            tempComp.playOnAwake = source.playOnAwake;
             if (tempComp.gameObject.CompareTag(bgmTag))
             {
                 tempComp.type = AudioComponentSettingType.Bgm;
@@ -69,6 +70,8 @@ public class AudioSourcesSetterByTags : MonoBehaviour
                         break;
                 }
             }
+            if (!tempComp.playOnAwake)
+                tempComp.Stop();
         }
     }
 }

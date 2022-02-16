@@ -70,6 +70,27 @@ public class AudioSourceSetter : AudioComponent
         }
     }
 
+    public void Pause()
+    {
+        if (playMode != PlayMode.PlayClipAtAudioSource)
+            return;
+        cacheAudioSource.Pause();
+    }
+
+    public void UnPause()
+    {
+        if (playMode != PlayMode.PlayClipAtAudioSource)
+            return;
+        cacheAudioSource.UnPause();
+    }
+
+    public void Stop()
+    {
+        if (playMode != PlayMode.PlayClipAtAudioSource)
+            return;
+        cacheAudioSource.Stop();
+    }
+
     private void Update()
     {
         float volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
