@@ -30,29 +30,26 @@ public class AudioSourcesSetterByTags : MonoBehaviour
         {
             tempCustomIdTags[customIdTag.tag] = customIdTag.id;
         }
-        AudioSourceSetter tempComp;
+        AudioSourceSetterWithoutControls tempComp;
         AudioSource[] sources = FindObjectsOfType<AudioSource>(true);
-        bool tempIsSourcePlaying;
         foreach (AudioSource source in sources)
         {
-            tempComp = source.gameObject.GetComponent<AudioSourceSetter>();
+            tempComp = source.gameObject.GetComponent<AudioSourceSetterWithoutControls>();
             if (tempComp) continue;
-            tempComp = source.gameObject.AddComponent<AudioSourceSetter>();
-            tempComp.playOnAwake = source.playOnAwake;
-            tempIsSourcePlaying = source.isPlaying;
-            if (tempComp.gameObject.CompareTag(bgmTag))
+            tempComp = source.gameObject.AddComponent<AudioSourceSetterWithoutControls>();
+            if (source.gameObject.CompareTag(bgmTag))
             {
                 tempComp.type = AudioComponentSettingType.Bgm;
             }
-            else if (tempComp.gameObject.CompareTag(sfxTag))
+            else if (source.gameObject.CompareTag(sfxTag))
             {
                 tempComp.type = AudioComponentSettingType.Sfx;
             }
-            else if (tempComp.gameObject.CompareTag(ambientTag))
+            else if (source.gameObject.CompareTag(ambientTag))
             {
                 tempComp.type = AudioComponentSettingType.Ambient;
             }
-            else if (tempCustomIdTags.ContainsKey(tempComp.gameObject.tag))
+            else if (tempCustomIdTags.ContainsKey(source.gameObject.tag))
             {
                 tempComp.type = AudioComponentSettingType.Other;
                 tempComp.otherSettingId = tempCustomIdTags[tempComp.gameObject.tag];
@@ -72,8 +69,6 @@ public class AudioSourcesSetterByTags : MonoBehaviour
                         break;
                 }
             }
-            if (!tempIsSourcePlaying)
-                tempComp.Stop();
         }
     }
 }
