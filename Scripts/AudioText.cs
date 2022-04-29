@@ -14,6 +14,6 @@ public class AudioText : AudioComponent
 
     private void Update()
     {
-        text.text = string.Format(format, AudioManager.Singleton.GetVolumeLevelSetting(SettingId));
+        text.text = string.Format(format, (AudioManager.Singleton.GetVolumeLevelSetting(SettingId) * 100f).ToString("N0"));
     }
 }
