@@ -4,7 +4,20 @@ using UnityEngine.Rendering;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Singleton { get; private set; }
+    private static AudioManager singleton;
+    public static AudioManager Singleton
+    {
+        get
+        {
+            if (singleton != null)
+                return singleton;
+            return new GameObject("_AudioManager").AddComponent<AudioManager>();
+        }
+        private set
+        {
+            singleton = value;
+        }
+    }
 
     public AudioSetting masterVolumeSetting = new AudioSetting() { id = "MASTER" };
     public AudioSetting bgmVolumeSetting = new AudioSetting() { id = "BGM" };
@@ -16,12 +29,12 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Singleton != null)
+        if (singleton != null)
         {
             Destroy(gameObject);
             return;
         }
-        Singleton = this;
+        singleton = this;
         DontDestroyOnLoad(gameObject);
 
         if (SystemInfo.graphicsDeviceType == GraphicsDeviceType.Null)
