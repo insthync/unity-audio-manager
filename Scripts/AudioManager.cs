@@ -86,15 +86,15 @@ public class AudioManager : MonoBehaviour
         return 0;
     }
 
-    public static void PlaySfxClipAtPoint(AudioClip audioClip, Vector3 position)
+    public static void PlaySfxClipAtPoint(AudioClip audioClip, Vector3 position, float volumeScale = 1f)
     {
         if (audioClip == null) return;
-        AudioSource.PlayClipAtPoint(audioClip, position, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
+        AudioSource.PlayClipAtPoint(audioClip, position, (Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level) * volumeScale);
     }
 
-    public static void PlaySfxClipAtAudioSource(AudioClip audioClip, AudioSource audioSource)
+    public static void PlaySfxClipAtAudioSource(AudioClip audioClip, AudioSource audioSource, float volumeScale = 1f)
     {
         if (audioClip == null || audioSource == null) return;
-        audioSource.PlayOneShot(audioClip, Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level);
+        audioSource.PlayOneShot(audioClip, (Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level) * volumeScale);
     }
 }
