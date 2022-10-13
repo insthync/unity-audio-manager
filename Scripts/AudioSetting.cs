@@ -11,20 +11,20 @@ public class AudioSetting
     [Range(0.01f, 1f)]
     public float volumeScale = 1f;
 
-    private bool? isOn;
-    private float? levelSetting;
+    private bool? _isOn;
+    private float? _levelSetting;
 
     public bool IsOn
     {
         get
         {
-            if (!isOn.HasValue)
-                isOn = PlayerPrefs.GetInt(KeyVolumeOnPrefix + id, 1) == 0 ? false : true;
-            return isOn.Value;
+            if (!_isOn.HasValue)
+                _isOn = PlayerPrefs.GetInt(KeyVolumeOnPrefix + id, 1) == 0 ? false : true;
+            return _isOn.Value;
         }
         set
         {
-            isOn = value;
+            _isOn = value;
             PlayerPrefs.SetInt(KeyVolumeOnPrefix + id, value ? 1 : 0);
             PlayerPrefs.Save();
         }
@@ -34,13 +34,13 @@ public class AudioSetting
     {
         get
         {
-            if (!levelSetting.HasValue)
-                levelSetting = PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1);
-            return levelSetting.Value;
+            if (!_levelSetting.HasValue)
+                _levelSetting = PlayerPrefs.GetFloat(KeyVolumeLevelPrefix + id, 1);
+            return _levelSetting.Value;
         }
         set
         {
-            levelSetting = value;
+            _levelSetting = value;
             PlayerPrefs.SetFloat(KeyVolumeLevelPrefix + id, value);
             PlayerPrefs.Save();
         }

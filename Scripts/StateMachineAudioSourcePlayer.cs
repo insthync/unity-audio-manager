@@ -8,9 +8,10 @@ public class StateMachineAudioSourcePlayer : StateMachineBehaviour
     [Range(0f, 1f)]
     public float triggerTime;
     public AudioClip[] randomClips;
-    private bool isTriggered;
-    private int dirtyVolume;
-    private AudioSource source;
+
+    private bool _isTriggered;
+    private int _dirtyVolume;
+    private AudioSource _source;
 
     public string SettingId
     {
@@ -34,43 +35,43 @@ public class StateMachineAudioSourcePlayer : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        isTriggered = false;
+        _isTriggered = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         float volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
-        if (source != null)
+        if (_source != null)
         {
             int intVolume = (int)(volume * 100);
-            if (dirtyVolume != intVolume)
+            if (_dirtyVolume != intVolume)
             {
-                dirtyVolume = intVolume;
-                source.volume = volume;
+                _dirtyVolume = intVolume;
+                _source.volume = volume;
             }
         }
-        if (stateInfo.normalizedTime % 1 >= triggerTime && !isTriggered)
+        if (stateInfo.normalizedTime % 1 >= triggerTime && !_isTriggered)
         {
-            isTriggered = true;
+            _isTriggered = true;
             if (audioSourcePrefab != null)
             {
-                source = Instantiate(audioSourcePrefab, animator.transform.position, Quaternion.identity);
+                _source = Instantiate(audioSourcePrefab, animator.transform.position, Quaternion.identity);
             }
             else
             {
                 GameObject obj = new GameObject("audioSource");
                 obj.transform.position = animator.transform.position;
-                source = obj.AddComponent<AudioSource>();
-                source.spatialBlend = 1f;
+                _source = obj.AddComponent<AudioSource>();
+                _source.spatialBlend = 1f;
             }
-            source.volume = volume;
+            _source.volume = volume;
             if (!AudioListener.pause)
-                source.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
+                _source.PlayOneShot(randomClips[Random.Range(0, randomClips.Length)]);
         }
-        else if (stateInfo.normalizedTime % 1 < triggerTime && isTriggered)
+        else if (stateInfo.normalizedTime % 1 < triggerTime && _isTriggered)
         {
-            isTriggered = false;
+            _isTriggered = false;
         }
     }
 }

@@ -2,17 +2,17 @@
 
 public class AudioSourceSetterWithoutControls : AudioComponent
 {
-    private AudioSource cacheAudioSource;
-    private int dirtyVolume;
+    private AudioSource _cacheAudioSource;
+    private int _dirtyVolume;
 
     private void Awake()
     {
-        dirtyVolume = -1;
-        cacheAudioSource = GetComponent<AudioSource>();
-        if (cacheAudioSource == null)
+        _dirtyVolume = -1;
+        _cacheAudioSource = GetComponent<AudioSource>();
+        if (_cacheAudioSource == null)
         {
-            cacheAudioSource = gameObject.AddComponent<AudioSource>();
-            cacheAudioSource.spatialBlend = 1f;
+            _cacheAudioSource = gameObject.AddComponent<AudioSource>();
+            _cacheAudioSource.spatialBlend = 1f;
         }
     }
 
@@ -20,10 +20,10 @@ public class AudioSourceSetterWithoutControls : AudioComponent
     {
         float volume = AudioManager.Singleton.GetVolumeLevel(SettingId);
         int intVolume = (int)(volume * 100);
-        if (dirtyVolume != intVolume)
+        if (_dirtyVolume != intVolume)
         {
-            dirtyVolume = intVolume;
-            cacheAudioSource.volume = volume;
+            _dirtyVolume = intVolume;
+            _cacheAudioSource.volume = volume;
         }
     }
 }
