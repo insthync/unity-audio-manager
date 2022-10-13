@@ -1,14 +1,5 @@
 ﻿using UnityEngine;
 
-public enum AudioComponentSettingType
-{
-    Master,
-    Bgm,
-    Sfx,
-    Ambient,
-    Other
-}
-
 public class AudioComponent : MonoBehaviour
 {
     public AudioComponentSettingType type;
