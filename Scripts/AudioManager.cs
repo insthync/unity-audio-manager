@@ -88,13 +88,13 @@ public class AudioManager : MonoBehaviour
 
     public static void PlaySfxClipAtPoint(AudioClip audioClip, Vector3 position, float volumeScale = 1f)
     {
-        if (audioClip == null) return;
+        if (Application.isBatchMode || AudioListener.pause || audioClip == null) return;
         AudioSource.PlayClipAtPoint(audioClip, position, (Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level) * volumeScale);
     }
 
     public static void PlaySfxClipAtAudioSource(AudioClip audioClip, AudioSource audioSource, float volumeScale = 1f)
     {
-        if (audioClip == null || audioSource == null) return;
+        if (Application.isBatchMode || AudioListener.pause || audioClip == null || audioSource == null) return;
         audioSource.PlayOneShot(audioClip, (Singleton == null ? 1f : Singleton.sfxVolumeSetting.Level) * volumeScale);
     }
 }

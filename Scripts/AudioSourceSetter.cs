@@ -43,8 +43,9 @@ public class AudioSourceSetter : AudioComponent
 
     public void Play()
     {
-        if (AudioListener.pause)
+        if (Application.isBatchMode || AudioListener.pause)
             return;
+
         AudioClip clip = null;
         if (randomClips.Length > 0)
             clip = randomClips[Random.Range(0, randomClips.Length)];
