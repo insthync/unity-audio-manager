@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class AudioSettingManager : MonoBehaviour
+[DefaultExecutionOrder(100)]
+public class AudioSettingManager : MonoBehaviour
 {
     private Dictionary<string, AudioSetting> _defaultVolumeSettings = new Dictionary<string, AudioSetting>();
     private Dictionary<string, AudioSlider> _sliders = new Dictionary<string, AudioSlider>();
