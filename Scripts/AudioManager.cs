@@ -44,9 +44,12 @@ public class AudioManager : MonoBehaviour
         VolumeSettings[bgmVolumeSetting.id] = bgmVolumeSetting;
         VolumeSettings[sfxVolumeSetting.id] = sfxVolumeSetting;
         VolumeSettings[ambientVolumeSetting.id] = ambientVolumeSetting;
-        foreach (AudioSetting otherVolumeSetting in otherVolumeSettings)
+        if (otherVolumeSettings != null)
         {
-            VolumeSettings[otherVolumeSetting.id] = otherVolumeSetting;
+            foreach (AudioSetting otherVolumeSetting in otherVolumeSettings)
+            {
+                VolumeSettings[otherVolumeSetting.id] = otherVolumeSetting;
+            }
         }
     }
 
