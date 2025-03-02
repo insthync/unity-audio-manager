@@ -1,8 +1,11 @@
-public enum AudioComponentSettingType
+namespace Insthync.AudioManager
 {
-    Master,
-    Bgm,
-    Sfx,
-    Ambient,
-    Other
+    public enum AudioComponentSettingType
+    {
+        Master,
+        Bgm,
+        Sfx,
+        Ambient,
+        Other
+    }
 }

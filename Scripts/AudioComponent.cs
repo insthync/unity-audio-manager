@@ -1,26 +1,29 @@
 ﻿using UnityEngine;
 
-public class AudioComponent : MonoBehaviour
+namespace Insthync.AudioManager
 {
-    public AudioComponentSettingType type;
-    public string otherSettingId;
-
-    public string SettingId
+    public class AudioComponent : MonoBehaviour
     {
-        get
+        public AudioComponentSettingType type;
+        public string otherSettingId;
+
+        public string SettingId
         {
-            switch (type)
+            get
             {
-                case AudioComponentSettingType.Master:
-                    return AudioManager.Singleton.masterVolumeSetting.id;
-                case AudioComponentSettingType.Bgm:
-                    return AudioManager.Singleton.bgmVolumeSetting.id;
-                case AudioComponentSettingType.Sfx:
-                    return AudioManager.Singleton.sfxVolumeSetting.id;
-                case AudioComponentSettingType.Ambient:
-                    return AudioManager.Singleton.ambientVolumeSetting.id;
+                switch (type)
+                {
+                    case AudioComponentSettingType.Master:
+                        return AudioManager.Singleton.masterVolumeSetting.id;
+                    case AudioComponentSettingType.Bgm:
+                        return AudioManager.Singleton.bgmVolumeSetting.id;
+                    case AudioComponentSettingType.Sfx:
+                        return AudioManager.Singleton.sfxVolumeSetting.id;
+                    case AudioComponentSettingType.Ambient:
+                        return AudioManager.Singleton.ambientVolumeSetting.id;
+                }
+                return otherSettingId;
             }
-            return otherSettingId;
         }
     }
 }

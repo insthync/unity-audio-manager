@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Toggle))]
-public class AudioToggle : AudioComponent
+namespace Insthync.AudioManager
 {
-    public Toggle toggle { get; private set; }
-    private void Awake()
+    [RequireComponent(typeof(Toggle))]
+    public class AudioToggle : AudioComponent
     {
-        toggle = GetComponent<Toggle>();
-        toggle.onValueChanged.RemoveListener(OnValueChanged);
-        toggle.onValueChanged.AddListener(OnValueChanged);
-    }
+        public Toggle toggle { get; private set; }
+        private void Awake()
+        {
+            toggle = GetComponent<Toggle>();
+            toggle.onValueChanged.RemoveListener(OnValueChanged);
+            toggle.onValueChanged.AddListener(OnValueChanged);
+        }
 
-    private void OnValueChanged(bool isOn)
-    {
-        AudioManager.Singleton.SetVolumeIsOn(SettingId, isOn);
-    }
+        private void OnValueChanged(bool isOn)
+        {
+            AudioManager.Singleton.SetVolumeIsOn(SettingId, isOn);
+        }
 
-    private void OnEnable()
-    {
-        toggle.isOn = AudioManager.Singleton.GetVolumeIsOn(SettingId);
+        private void OnEnable()
+        {
+            toggle.isOn = AudioManager.Singleton.GetVolumeIsOn(SettingId);
+        }
     }
 }

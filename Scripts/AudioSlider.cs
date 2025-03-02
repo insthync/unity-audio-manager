@@ -1,52 +1,55 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
-public class AudioSlider : AudioComponent
+namespace Insthync.AudioManager
 {
-    public Slider slider { get; private set; }
-    public float volumeChangeStepOnClick = 0.01f;
-    public Button buttonIncrease;
-    public Button buttonDecrease;
-
-    private void Awake()
+    [RequireComponent(typeof(Slider))]
+    public class AudioSlider : AudioComponent
     {
-        slider = GetComponent<Slider>();
-        slider.minValue = 0;
-        slider.maxValue = 1;
-        slider.onValueChanged.RemoveListener(OnValueChanged);
-        slider.onValueChanged.AddListener(OnValueChanged);
-        if (buttonIncrease != null)
-            buttonIncrease.onClick.AddListener(OnClickIncrease);
-        if (buttonDecrease != null)
-            buttonDecrease.onClick.AddListener(OnClickDecrease);
-    }
+        public Slider slider { get; private set; }
+        public float volumeChangeStepOnClick = 0.01f;
+        public Button buttonIncrease;
+        public Button buttonDecrease;
 
-    private void OnDestroy()
-    {
-        if (buttonIncrease != null)
-            buttonIncrease.onClick.RemoveListener(OnClickIncrease);
-        if (buttonDecrease != null)
-            buttonDecrease.onClick.RemoveListener(OnClickDecrease);
-    }
+        private void Awake()
+        {
+            slider = GetComponent<Slider>();
+            slider.minValue = 0;
+            slider.maxValue = 1;
+            slider.onValueChanged.RemoveListener(OnValueChanged);
+            slider.onValueChanged.AddListener(OnValueChanged);
+            if (buttonIncrease != null)
+                buttonIncrease.onClick.AddListener(OnClickIncrease);
+            if (buttonDecrease != null)
+                buttonDecrease.onClick.AddListener(OnClickDecrease);
+        }
 
-    private void OnValueChanged(float level)
-    {
-        AudioManager.Singleton.SetVolumeLevelSetting(SettingId, level);
-    }
+        private void OnDestroy()
+        {
+            if (buttonIncrease != null)
+                buttonIncrease.onClick.RemoveListener(OnClickIncrease);
+            if (buttonDecrease != null)
+                buttonDecrease.onClick.RemoveListener(OnClickDecrease);
+        }
 
-    private void OnEnable()
-    {
-        slider.value = AudioManager.Singleton.GetVolumeLevelSetting(SettingId);
-    }
+        private void OnValueChanged(float level)
+        {
+            AudioManager.Singleton.SetVolumeLevelSetting(SettingId, level);
+        }
 
-    public void OnClickIncrease()
-    {
-        slider.value += volumeChangeStepOnClick;
-    }
+        private void OnEnable()
+        {
+            slider.value = AudioManager.Singleton.GetVolumeLevelSetting(SettingId);
+        }
 
-    public void OnClickDecrease()
-    {
-        slider.value -= volumeChangeStepOnClick;
+        public void OnClickIncrease()
+        {
+            slider.value += volumeChangeStepOnClick;
+        }
+
+        public void OnClickDecrease()
+        {
+            slider.value -= volumeChangeStepOnClick;
+        }
     }
 }
